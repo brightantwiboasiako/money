@@ -15,7 +15,7 @@ Create a new money instance:
 <code>
 <?php
 
-use \Money\Money;
+use \Money\Money;<br>
 use \Money\Currency;
 
 $money = new Money(50.00, new Currency('en-US'));
