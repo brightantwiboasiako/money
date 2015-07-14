@@ -12,6 +12,9 @@ Usage:
 
 Create a new money instance:
 
+<code>
+<?php
+
 use \Money\Money;
 use \Money\Currency;
 
@@ -19,5 +22,9 @@ $money = new Money(50.00, new Currency('en-US'));
 
 echo $money
 
+
+?>
+
+</code>
 The above code will print 
 $50.00
