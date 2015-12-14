@@ -1,4 +1,5 @@
 <?php namespace Money;
+use Money\Exceptions\InvalidAmountException;
 
 /**
  * Description of Money
@@ -9,15 +10,27 @@ class Money
 {
     
     /**
-     * private double $amount
+     * private int $amount
      * 
-     * Amount of the money
+     * The whole part of the money
      * 
-     * @var double
+     * @var int
      * 
      * @access private
      */
-    private $amount = 0.00;
+    private $whole = 0;
+
+
+    /**
+     * private int fraction
+     *
+     * The fractional part of the money
+     *
+     * @var int
+     *
+     * @access private
+     */
+    private $fraction = 0;
     
     
     /**
@@ -25,7 +38,7 @@ class Money
      * 
      * The currency of the money
      * 
-     * @var Money\Currency
+     * @var Currency
      * 
      * @access private
      */
@@ -39,7 +52,7 @@ class Money
      * 
      * @param \Money\Currency $currency
      */
-    public function __construct($amount, Currency $currency)
+    public function __construct($amount, Currency $currency = null)
     {
         $this->setAmount($amount);
         $this->setCurrency($currency);
@@ -57,9 +70,107 @@ class Money
      */
     private function setAmount($amount)
     {
-        $this->amount = $amount;
+        $this->setWhole($amount);
+        $this->setFraction($amount);
     }
-    
+
+
+    /**
+     * Sets the whole number part of the money
+     *
+     * @param $amount
+     * @return void
+     */
+    private function setWhole($amount)
+    {
+        $this->whole = (int)floor($amount);
+    }
+
+
+    /**
+     * Sets the fractional part of the money
+     *
+     * @param $amount
+     * @return void
+     */
+    private function setFraction($amount)
+    {
+        $this->fraction = (int)floor(($amount - $this->getWhole()) * 100);
+    }
+
+
+    public function add(Money $money)
+    {
+        $sum = new Money($this->getAmount() + $money->getAmount());
+
+        $this->setWhole($sum->getWhole());
+        $this->setFraction($sum->getFraction());
+    }
+
+
+    /**
+     * @param Money $money
+     * @throws InvalidAmountException
+     */
+    public function subtract(Money $money)
+    {
+        if($this->notLessThan($money))
+        {
+            $diff = new Money($this->getAmount() - $money->getAmount());
+
+            $this->setWhole($diff->getWhole());
+            $this->setFraction($diff->getFraction());
+        }
+        else
+            throw new InvalidAmountException;
+    }
+
+
+    /**
+     * @param Money $money
+     * @return bool
+     */
+    public function lessThan(Money $money)
+    {
+        return $this->getAmount() < $money->getAmount();
+    }
+
+    /**
+     * @param Money $money
+     * @return bool
+     */
+    public function greaterThan(Money $money)
+    {
+        return $this->getAmount() > $money->getAmount();
+    }
+
+
+    /**
+     * @param Money $money
+     * @return bool
+     */
+    public function notLessThan(Money $money)
+    {
+        return $this->getAmount() >= $money->getAmount();
+    }
+
+
+    /**
+     * @param Money $money
+     * @return bool
+     */
+    public function netGreaterThan(Money $money)
+    {
+        return $this->getAmount() <= $money->getAmount();
+    }
+
+
+    public function equals(Money $money)
+    {
+        return $this->getWhole() == $money->getWhole()
+               && $this->getFraction() == $money->getFraction();
+    }
+
     
     /**
      * public double getAmount(void)
@@ -71,7 +182,7 @@ class Money
      */
     public function getAmount()
     {
-        return $this->amount;
+        return (double)($this->getWhole().'.'.$this->getFraction());
     }
     
     
@@ -84,7 +195,7 @@ class Money
      */
     public function getWhole()
     {
-        return floor($this->getAmount());
+        return $this->whole;
     }
     
     
@@ -97,7 +208,7 @@ class Money
      */
     public function getFraction()
     {
-        return number_format($this->getAmount() - $this->getWhole(), 2) * 100;
+        return $this->fraction;
     }
     
     
@@ -110,9 +221,14 @@ class Money
      * 
      * @return void
      */
-    private function setCurrency(Currency $currency)
+    private function setCurrency(Currency $currency = null)
     {
-        $this->currency = $currency;
+        if($currency != null)
+            $this->currency = $currency;
+        else
+        {
+            $this->currency = new Currency();
+        }
     }
     
     /**
