@@ -159,7 +159,7 @@ class Money
      * @param Money $money
      * @return bool
      */
-    public function netGreaterThan(Money $money)
+    public function notGreaterThan(Money $money)
     {
         return $this->getAmount() <= $money->getAmount();
     }

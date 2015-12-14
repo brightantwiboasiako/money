@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe2f1b7d-9bda-413b-85ba-bc574cc223d2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Money/Exceptions/InvalidAmountException.php" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\money\nbproject\private\private.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\money\nbproject\private\private.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\money\nbproject\project.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\money\nbproject\project.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Money/Money.php" afterPath="$PROJECT_DIR$/src/Money/Money.php" />
     </list>
     <ignored path="money.iws" />
@@ -29,20 +24,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Money.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Money.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Money/Money.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-111.15385">
-              <caret line="170" column="64" selection-start-line="170" selection-start-column="64" selection-end-line="170" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.58219177">
+              <caret line="158" column="26" selection-start-line="158" selection-start-column="26" selection-end-line="158" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InvalidAmountException.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="InvalidAmountException.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Money/Exceptions/InvalidAmountException.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32020548">
+            <state vertical-scroll-proportion="-7.1923075">
               <caret line="16" column="62" selection-start-line="16" selection-start-column="62" selection-end-line="16" selection-end-column="62" />
               <folding />
             </state>
@@ -262,18 +257,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Money/Money.php">
+    <entry file="file://$PROJECT_DIR$/src/Money/Exceptions/InvalidAmountException.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-111.15385">
-          <caret line="170" column="64" selection-start-line="170" selection-start-column="64" selection-end-line="170" selection-end-column="64" />
+        <state vertical-scroll-proportion="-7.1923075">
+          <caret line="16" column="62" selection-start-line="16" selection-start-column="62" selection-end-line="16" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Money/Exceptions/InvalidAmountException.php">
+    <entry file="file://$PROJECT_DIR$/src/Money/Money.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32020548">
-          <caret line="16" column="62" selection-start-line="16" selection-start-column="62" selection-end-line="16" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.58219177">
+          <caret line="158" column="26" selection-start-line="158" selection-start-column="26" selection-end-line="158" selection-end-column="26" />
           <folding />
         </state>
       </provider>
