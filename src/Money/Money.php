@@ -95,7 +95,19 @@ class Money
      */
     private function setFraction($amount)
     {
-        $this->fraction = (int)(round(($amount - $this->getWhole()) * 100));
+
+        $diff = round(($amount - $this->getWhole()) * 100);
+
+        if($diff == 100)
+        {
+            $this->setWhole($this->getWhole() + floor($diff/100));
+            $this->fraction = 0;
+        }
+        else
+        {
+            $this->fraction = (int)$diff;
+        }
+
     }
 
 
