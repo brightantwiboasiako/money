@@ -118,9 +118,10 @@ class Currency
      * 
      * @return String
      */
-    public function getSymbol()
+    public static function getSymbol()
     {
-        return $this->getNumberFormatter()
+        $currency = new static();
+        return $currency->getNumberFormatter()
                 ->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }
     
