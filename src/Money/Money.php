@@ -138,6 +138,15 @@ class Money
     }
 
 
+    public function times($factor)
+    {
+        if($factor < 0)
+            throw new \InvalidArgumentException("Factor cannot be negative!");
+
+        return new static($factor * $this->getAmount());
+    }
+
+
     /**
      * @param Money $money
      * @return bool
