@@ -96,53 +96,47 @@ class Money
     private function setFraction($amount)
     {
 
-        $diff = round(($amount - $this->getWhole()) * 100);
+        $doubleFraction = $amount * 100;
 
-        if($diff == 100)
-        {
-            $this->setWhole($this->getWhole() + floor($diff/100));
-            $this->fraction = 0;
-        }
-        else
-        {
-            $this->fraction = (int)$diff;
-        }
+        $intFraction = ($this->round(abs($doubleFraction))) % 100;
 
+        if($intFraction < 0)
+            $intFraction = -$intFraction;
+
+        $this->fraction = $intFraction;
+
+    }
+
+
+    private function round($number)
+    {
+        return (int)floor($number + 0.5);
     }
 
 
     public function add(Money $money)
     {
-        $sum = new Money($this->getAmount() + $money->getAmount());
+        $sum = $this->getAmount() + $money->getAmount();
 
-        $this->setWhole($sum->getWhole());
-        $this->setFraction($sum->getFraction());
+        $this->setWhole($sum);
+        $this->setFraction($sum);
     }
 
 
     /**
      * @param Money $money
-     * @throws InvalidAmountException
      */
     public function subtract(Money $money)
     {
-        if($this->notLessThan($money))
-        {
-            $diff = new Money($this->getAmount() - $money->getAmount());
+        $diff = new Money($this->getAmount() - $money->getAmount());
 
-            $this->setWhole($diff->getWhole());
-            $this->setFraction($diff->getFraction());
-        }
-        else
-            throw new InvalidAmountException;
+        $this->setWhole($diff->getAmount());
+        $this->setFraction($diff->getAmount());
     }
 
 
     public function times($factor)
     {
-        if($factor < 0)
-            throw new \InvalidArgumentException("Factor cannot be negative!");
-
         return new static($factor * $this->getAmount());
     }
 
@@ -203,7 +197,7 @@ class Money
      */
     public function getAmount()
     {
-        return (double)($this->getWhole().'.'.$this->getFraction());
+        return (double)($this->getWhole() + 0.01 * $this->getFraction());
     }
     
     
