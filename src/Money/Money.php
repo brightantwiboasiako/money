@@ -120,6 +120,8 @@ class Money
 
         $this->setWhole($sum);
         $this->setFraction($sum);
+
+        return $this;
     }
 
 
@@ -132,12 +134,19 @@ class Money
 
         $this->setWhole($diff->getAmount());
         $this->setFraction($diff->getAmount());
+
+        return $this;
     }
 
 
     public function times($factor)
     {
-        return new static($factor * $this->getAmount());
+        $totalFactor = $factor * $this->getAmount();
+
+        $this->setWhole($totalFactor);
+        $this->setFraction($totalFactor);
+
+        return $this;
     }
 
 
