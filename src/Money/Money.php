@@ -267,6 +267,19 @@ class Money
     {
         return $this->currency;
     }
+
+
+    /**
+     * Gets the secure amount of the money
+     *
+     * @deprecated Please use getAmount instead
+     *
+     * @return float
+     */
+    public function getSecure()
+    {
+        return $this->getAmount();
+    }
     
     
     /**
