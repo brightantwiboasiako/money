@@ -49,7 +49,8 @@ class Money
      * public Money\Money(\Money\Currency $currency)
      * 
      * Instantiates the currency object
-     * 
+     *
+     * @param double
      * @param \Money\Currency $currency
      */
     public function __construct($amount, Currency $currency = null)
@@ -108,12 +109,24 @@ class Money
     }
 
 
+    /**
+     * Rounds a given number to the nearest integer
+     *
+     * @param $number
+     * @return int
+     */
     private function round($number)
     {
         return (int)floor($number + 0.5);
     }
 
 
+    /**
+     * Adds given money to this money
+     *
+     * @param Money $money
+     * @return void
+     */
     public function add(Money $money)
     {
         $sum = $this->getAmount() + $money->getAmount();
@@ -121,12 +134,14 @@ class Money
         $this->setWhole($sum);
         $this->setFraction($sum);
 
-        return $this;
     }
 
 
     /**
+     * Subtracts the given money from this money
+     *
      * @param Money $money
+     * @return void
      */
     public function subtract(Money $money)
     {
@@ -135,10 +150,15 @@ class Money
         $this->setWhole($diff->getAmount());
         $this->setFraction($diff->getAmount());
 
-        return $this;
     }
 
 
+    /**
+     * Scales this money by the provided factor
+     *
+     * @param $factor
+     * @return void
+     */
     public function times($factor)
     {
         $totalFactor = $factor * $this->getAmount();
@@ -146,7 +166,6 @@ class Money
         $this->setWhole($totalFactor);
         $this->setFraction($totalFactor);
 
-        return $this;
     }
 
 
@@ -271,14 +290,13 @@ class Money
 
     /**
      * Gets the secure amount of the money
-     *
-     * @deprecated Please use getAmount instead
+     * as an integer
      *
      * @return float
      */
     public function getSecure()
     {
-        return $this->getAmount();
+        return (int)($this->getWhole().$this->getFraction());
     }
     
     
