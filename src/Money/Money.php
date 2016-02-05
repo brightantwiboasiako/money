@@ -79,10 +79,15 @@ class Money
      *
      * @param $amount
      * @param Currency|null $currency
+     *
      * @return Money
+     * @throws InvalidAmountException
      */
     public static function withSecure($amount, Currency $currency = null)
     {
+        if(!is_long($amount))
+            throw new InvalidAmountException;
+
         $money = self::withRaw(0, $currency);
         $money->setFraction($amount / 100);
         $money->setWhole($amount / 100);
