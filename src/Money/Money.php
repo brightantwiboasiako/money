@@ -84,8 +84,8 @@ class Money
     public static function withSecure($amount, Currency $currency = null)
     {
         $money = self::withRaw(0, $currency);
-        $money->setFraction($amount % 100);
-        $money->setWhole($amount/100);
+        $money->setFraction($amount / 100);
+        $money->setWhole($amount / 100);
 
         return $money;
     }
