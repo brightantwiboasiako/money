@@ -46,9 +46,8 @@ class Money
     
     
     /**
-     * public Money\Money(\Money\Currency $currency)
-     * 
-     * Instantiates the currency object
+     * Instantiates the currency object using a
+     * double amount and a Currency
      *
      * @param double
      * @param \Money\Currency $currency
@@ -58,6 +57,39 @@ class Money
         $this->setAmount($amount);
         $this->setCurrency($currency);
     }
+
+
+    /**
+     * Makes a money object with a raw double amount
+     *
+     * @param $amount
+     * @param Currency|null $currency
+     * @return Money
+     */
+    public static function withRaw($amount, Currency $currency = null)
+    {
+        return new self($amount, $currency);
+    }
+
+
+    /**
+     * Creates a money instance using a complete
+     * integer value for both the whole part
+     * and the fractional part
+     *
+     * @param $amount
+     * @param Currency|null $currency
+     * @return Money
+     */
+    public static function withSecure($amount, Currency $currency = null)
+    {
+        $money = self::withRaw(0, $currency);
+        $money->setFraction($amount % 100);
+        $money->setWhole($amount/100);
+
+        return $money;
+    }
+
     
     
     /**
