@@ -1,6 +1,5 @@
 <?php namespace Money;
 use Money\Exceptions\InvalidAmountException;
-
 /**
  * Description of Money
  *
@@ -19,8 +18,6 @@ class Money
      * @access private
      */
     private $whole = 0;
-
-
     /**
      * private int fraction
      *
@@ -57,8 +54,6 @@ class Money
         $this->setAmount($amount);
         $this->setCurrency($currency);
     }
-
-
     /**
      * Makes a money object with a raw double amount
      *
@@ -70,8 +65,6 @@ class Money
     {
         return new self($amount, $currency);
     }
-
-
     /**
      * Creates a money instance using a complete
      * integer value for both the whole part
@@ -87,14 +80,11 @@ class Money
     {
         if(!is_long($amount))
             throw new InvalidAmountException;
-
         $money = self::withRaw(0, $currency);
         $money->setFraction($amount / 100);
         $money->setWhole($amount / 100);
-
         return $money;
     }
-
     
     
     /**
@@ -111,8 +101,6 @@ class Money
         $this->setWhole($amount);
         $this->setFraction($amount);
     }
-
-
     /**
      * Sets the whole number part of the money
      *
@@ -123,8 +111,6 @@ class Money
     {
         $this->whole = (int)floor($amount);
     }
-
-
     /**
      * Sets the fractional part of the money
      *
@@ -133,19 +119,12 @@ class Money
      */
     private function setFraction($amount)
     {
-
         $doubleFraction = $amount * 100;
-
         $intFraction = ($this->round(abs($doubleFraction))) % 100;
-
         if($intFraction < 0)
             $intFraction = -$intFraction;
-
         $this->fraction = $intFraction;
-
     }
-
-
     /**
      * Rounds a given number to the nearest integer
      *
@@ -156,8 +135,6 @@ class Money
     {
         return (int)floor($number + 0.5);
     }
-
-
     /**
      * Adds given money to this money
      *
@@ -167,13 +144,9 @@ class Money
     public function add(Money $money)
     {
         $sum = $this->getAmount() + $money->getAmount();
-
         $this->setWhole($sum);
         $this->setFraction($sum);
-
     }
-
-
     /**
      * Subtracts the given money from this money
      *
@@ -183,13 +156,9 @@ class Money
     public function subtract(Money $money)
     {
         $diff = new Money($this->getAmount() - $money->getAmount());
-
         $this->setWhole($diff->getAmount());
         $this->setFraction($diff->getAmount());
-
     }
-
-
     /**
      * Scales this money by the provided factor
      *
@@ -199,13 +168,9 @@ class Money
     public function times($factor)
     {
         $totalFactor = $factor * $this->getAmount();
-
         $this->setWhole($totalFactor);
         $this->setFraction($totalFactor);
-
     }
-
-
     /**
      * @param Money $money
      * @return bool
@@ -214,7 +179,6 @@ class Money
     {
         return $this->getAmount() < $money->getAmount();
     }
-
     /**
      * @param Money $money
      * @return bool
@@ -223,8 +187,6 @@ class Money
     {
         return $this->getAmount() > $money->getAmount();
     }
-
-
     /**
      * @param Money $money
      * @return bool
@@ -233,8 +195,6 @@ class Money
     {
         return $this->getAmount() >= $money->getAmount();
     }
-
-
     /**
      * @param Money $money
      * @return bool
@@ -243,14 +203,11 @@ class Money
     {
         return $this->getAmount() <= $money->getAmount();
     }
-
-
     public function equals(Money $money)
     {
         return $this->getWhole() == $money->getWhole()
                && $this->getFraction() == $money->getFraction();
     }
-
     
     /**
      * public double getAmount(void)
@@ -323,17 +280,15 @@ class Money
     {
         return $this->currency;
     }
-
-
     /**
      * Gets the secure amount of the money
      * as an integer
      *
-     * @return float
+     * @return int
      */
     public function getSecure()
     {
-        return (int)($this->getWhole().$this->getFraction());
+        return (int)($this->getWhole().str_pad($this->getFraction(), 2, '0'));
     }
     
     
