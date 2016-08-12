@@ -4,9 +4,11 @@ that enhances internationalization using Locales.
 
 Installation:
 
-Install using <a href="http://composer.org">Composer</a>
-by requiring afoakwahsoftware/money in your composer.json file
+Using Composer:
 
+<code>
+composer require afoakwahsoftware/money
+</code>
 
 Usage:
 
