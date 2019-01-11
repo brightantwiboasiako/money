@@ -139,25 +139,29 @@ class Money
      * Adds given money to this money
      *
      * @param Money $money
-     * @return void
+     * @return Money
      */
     public function add(Money $money)
     {
         $sum = $this->getAmount() + $money->getAmount();
         $this->setWhole($sum);
         $this->setFraction($sum);
+
+        return $this;
     }
     /**
      * Subtracts the given money from this money
      *
      * @param Money $money
-     * @return void
+     * @return Money
      */
     public function subtract(Money $money)
     {
         $diff = new Money($this->getAmount() - $money->getAmount());
         $this->setWhole($diff->getAmount());
         $this->setFraction($diff->getAmount());
+
+        return $this;
     }
     /**
      * Scales this money by the provided factor
