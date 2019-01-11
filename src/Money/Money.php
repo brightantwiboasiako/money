@@ -146,7 +146,6 @@ class Money
         $sum = $this->getAmount() + $money->getAmount();
         $this->setWhole($sum);
         $this->setFraction($sum);
-
         return $this;
     }
     /**
@@ -160,7 +159,6 @@ class Money
         $diff = new Money($this->getAmount() - $money->getAmount());
         $this->setWhole($diff->getAmount());
         $this->setFraction($diff->getAmount());
-
         return $this;
     }
     /**
