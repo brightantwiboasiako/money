@@ -24,5 +24,6 @@
     "psr-0": {
       "Money": "src"
     }
-  }
+  },
+  "minimum-stability": "dev"
 }
