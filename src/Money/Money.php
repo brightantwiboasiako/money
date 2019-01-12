@@ -105,11 +105,12 @@ class Money
      * Sets the whole number part of the money
      *
      * @param $amount
-     * @return void
+     * @return Money
      */
     private function setWhole($amount)
     {
         $this->whole = (int)floor($amount);
+        return $this;
     }
     /**
      * Sets the fractional part of the money
@@ -165,13 +166,14 @@ class Money
      * Scales this money by the provided factor
      *
      * @param $factor
-     * @return void
+     * @return Money
      */
     public function times($factor)
     {
         $totalFactor = $factor * $this->getAmount();
         $this->setWhole($totalFactor);
         $this->setFraction($totalFactor);
+        return $this;
     }
     /**
      * @param Money $money
